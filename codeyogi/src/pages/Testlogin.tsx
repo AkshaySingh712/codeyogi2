@@ -1,27 +1,31 @@
-import { memo} from "react";
+
 import { Link, useHistory } from "react-router-dom";
 import {Formik,useFormik} from "formik";
 import * as yup from "yup";
 import {HiLockClosed} from "react-icons/hi";
 import {FaSpinner} from "react-icons/fa";
+import Input from "../components/Input";
+import React, { memo,FC,InputHTMLAttributes } from "react";
 
 
-interface Props { 
+interface Props  { 
 }
 const Testlogin:React.FC<Props>=(props)=>{
    const history=useHistory();
    const {
      getFieldProps,
+     handleSubmit,
      isSubmitting,
      errors,
-     touched
+     touched,
+     isValid
    }= useFormik({
   initialValues: {
     email:"",
     password:"",
   },
   validationSchema:yup.object().shape({
-    email:yup.string().required().email(),
+    email:yup.string().required("this field is required!!!").email(),
     password:yup.string().required().min(8,({min})=>`atleast ${min} character`)
   }),
   onSubmit:(data,{setSubmitting})=>{
@@ -44,7 +48,27 @@ return(
         <div> 
                 <h1 className="text-4xl font-normal tracking-wide">Log In to <span className="text-indigo-500  font-medium "> CODEYOGI</span></h1>
                 <p className="mt-5">New here? <Link to="/Signup" className="underline  text-indigo-500 "> Create an account</Link> </p>
-            </div> 
+            </div>
+            <form onSubmit={handleSubmit}>
+            <div>
+              <Input  
+            id="email" 
+            type="email"
+            autoComplete="email"
+            touched={touched.email}
+            error={errors.email}
+            {...getFieldProps("email")}
+             placeholder="email-address" />
+             </div>
+             <div><Input  
+            id="password" 
+            type="password"
+            touched={touched.password}
+            error={errors.password}
+            {...getFieldProps("password")}
+             placeholder="password" />
+             </div>
+             </form> 
             <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -69,6 +93,7 @@ return(
           <div>
             <button
             type="submit"
+            disabled={!isValid}
               className="group relative mt-5 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -80,11 +105,11 @@ return(
             <div>
            {isSubmitting && <FaSpinner  className="mt-5 animate-spin"></FaSpinner>}
           </div></div>
-            </form>         
+                  
         </div>
     </div>
 </div>
-);
+)
 };
 Testlogin.defaultProps={};
 export default memo(Testlogin);
