@@ -1,8 +1,9 @@
-import {FC, memo} from "react";
+import React, { memo} from "react";
 import {Route,Switch} from "react-router-dom";
 import Authhero from "../components/Authhero";
 import Login from "./Login.page";
 import Signup from "./Signup.page";
+import Testlogin from "./Testlogin"
 interface Props { 
 }
 const Auth:React.FC<Props>=(props)=>{
@@ -16,6 +17,9 @@ return(
         <Route path="/Signup">
             <Signup></Signup>
         </Route>
+        <Route path="/Testlogin">
+                <Testlogin></Testlogin>
+            </Route>
     </Switch>
     </div>
     <Authhero></Authhero>

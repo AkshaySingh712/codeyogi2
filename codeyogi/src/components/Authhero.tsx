@@ -1,12 +1,12 @@
-import {FC, memo} from "react";
+import { memo} from "react";
 interface Props { 
 }
 const Authhero:React.FC<Props>=(props)=>{
 return(
 <div className="h-screen w-1/2 text-white bg-black">
-    <img src="/src/logo.png"/>
+    <img src="/src/logo.png" alt="this logo " />
 </div>
 );
 };
 Authhero.defaultProps={};
-export default (Authhero);
+export default memo(Authhero);

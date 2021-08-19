@@ -14,13 +14,13 @@ return(
       <Route path="/"exact>
         <Redirect to="/Login"></Redirect>
       </Route>
-     <Route path={["/Login","/Signup"]} exact>
+     <Route path={["/Login","/Signup","/Testlogin"]} exact>
        <AuthPage></AuthPage>
     </Route>
     <Route 
     path=
     {["/Dashboard","/Recordings",
-    "/Lecture/:Lecturenumber/Batch/:Batchnumber"]} 
+    "/Lecture/:Lecturenumber/Batch/:Batchnumber",]} 
     exact >
       <AppContainer></AppContainer>
     </Route>
